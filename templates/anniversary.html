@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Anniversary | Luminary Wishes</title>
+    <link rel="stylesheet" href="template.css">
+</head>
+
+<body class="anniversary-theme">
+    <div class="aura-container">
+        <div class="aura-blob blob-1"></div>
+        <div class="aura-blob blob-2"></div>
+        <div class="aura-blob blob-3"></div>
+        <div class="aura-blob blob-4"></div>
+    </div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Interface Elements -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Music">🔊</button>
+    <button class="share-button" id="shareBtn" title="Share This Wish">🔗</button>
+    <audio id="bgMusic" loop src=""></audio>
+    <div id="confettiContainer"></div>
+
+    <div class="content-wrapper">
+        <div class="celebration-card">
+            <div class="card-branding reveal-item">
+                <img src="../assets/icon.svg" alt="Luminary Wishes" class="brand-logo-small">
+                <span class="brand-text-small">Luminary Wishes</span>
+            </div>
+
+            <div class="header-section reveal-item">
+                <h1 class="template-title">Happy Anniversary</h1>
+                <h2 class="couple-names" id="nameDisplay">Alex & Sam</h2>
+            </div>
+
+            <div class="message-container reveal-item">
+                <h3 class="message-header">A Special Message for You</h3>
+                <p class="custom-message-text" id="customMessage">
+                    Celebrating another beautiful year of love and happiness together. May your journey ahead be filled with even more wonderful moments! ❤️
+                </p>
+            </div>
+
+            <div class="header-section reveal-item" style="margin-top: 6rem; margin-bottom: 3rem;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent); font-style: italic;">Our Journey in Numbers</h3>
+            </div>
+
+            <div class="stats-grid reveal-item">
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">❤️</div>
+                    <span class="stat-number" id="yearsCount">0</span>
+                    <p class="stat-text">Years of Love</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">⏳</div>
+                    <span class="stat-number" id="daysCount">0</span>
+                    <p class="stat-text">Days Together</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">🌙</div>
+                    <span class="stat-number" id="monthsCount">0</span>
+                    <p class="stat-text">Months of Happiness</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">✨</div>
+                    <span class="stat-number" id="weeksCount">0</span>
+                    <p class="stat-text">Weeks of Magic</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">💝</div>
+                    <span class="stat-number" id="weekendsCount">0</span>
+                    <p class="stat-text">Weekends of Joy</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">🔥</div>
+                    <span class="stat-number" id="hoursCount">0</span>
+                    <p class="stat-text">Hours of Passion</p>
+                </div>
+            </div>
+
+            <div class="header-section reveal-item" style="margin-top: 8rem; margin-bottom: 1rem;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent); font-style: italic;">Key Milestones</h3>
+            </div>
+
+            <div class="love-timeline reveal-item">
+                <div class="timeline-item reveal-item">
+                    <div class="timeline-marker">🌱</div>
+                    <div class="timeline-content">
+                        <h3>The Beginning</h3>
+                        <p>Where your beautiful journey first started.</p>
+                    </div>
+                </div>
+                <div class="timeline-item reveal-item">
+                    <div class="timeline-marker">✨</div>
+                    <div class="timeline-content">
+                        <h3>Today</h3>
+                        <p>Celebrating the incredible bond you share.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="interactive-section reveal-item">
+                <button class="btn-premium" id="shareBtnAction">
+                    <span>💝 Share the Love</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="template-footer reveal-item">
+            <div class="footer-box">
+                <p>Created with 💝 by <a href="../index.html">Luminary Wishes</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/encryption-utils.js"></script>
+    <script src="template.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTemplate('anniversary');
+            // Hearts animation
+            setInterval(() => createFloatingHeart(), 1000);
+        });
+
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.style.cssText = `
+                position: fixed;
+                bottom: -20px;
+                left: ${Math.random() * 100}vw;
+                font-size: ${20 + Math.random() * 20}px;
+                opacity: ${0.5 + Math.random() * 0.5};
+                pointer-events: none;
+                z-index: 1;
+            `;
+            document.body.appendChild(heart);
+            heart.animate([
+                { transform: 'translateY(0) rotate(0deg)', opacity: 0.8 },
+                { transform: `translateY(-110vh) translateX(${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg)`, opacity: 0 }
+            ], {
+                duration: 4000 + Math.random() * 4000,
+                easing: 'ease-out'
+            }).onfinish = () => heart.remove();
+        }
+    </script>
+</body>
+
+</html>

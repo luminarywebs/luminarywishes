@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎂 Happy Birthday! 🎂</title>
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+    <link rel="stylesheet" href="template.css">
+<style>
+    @media (max-width: 768px) {
+        .stat-box[style*="grid-column: span 2"] {
+            grid-column: span 1 !important;
+        }
+    }
+</style>
+</head>
+
+<body class="birthday-theme">
+    <!-- Celestial Aura Background -->
+    <div class="aura-container">
+        <div class="aura-blob blob-1"></div>
+        <div class="aura-blob blob-2"></div>
+        <div class="aura-blob blob-3"></div>
+        <div class="aura-blob blob-4"></div>
+    </div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Interface Elements -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Music">🔊</button>
+    <button class="share-button" id="shareBtn" title="Share This Wish">🔗</button>
+    <audio id="bgMusic" loop src=""></audio>
+    <div id="confettiContainer"></div>
+
+    <div class="content-wrapper">
+        <div class="celebration-card reveal-item">
+            <div class="card-branding reveal-item">
+                <img src="../assets/icon.svg" alt="Luminary Wishes" class="brand-logo-small">
+                <span class="brand-text-small">Luminary Wishes</span>
+            </div>
+
+            <div class="header-section reveal-item">
+                <h1 class="template-title">Happy Birthday</h1>
+                <h2 class="name-display" id="nameDisplay">Alex</h2>
+            </div>
+
+            <div class="cake-container reveal-item">
+                <div class="cake-visual" id="birthdayCake" onclick="blowCandles()">
+                    🎂
+                    <div class="candle-container" id="candleContainer"></div>
+                </div>
+            </div>
+
+            <div class="interactive-section reveal-item" style="margin-top: 2rem; margin-bottom: 4rem;">
+                <button class="btn-premium" id="blowCandlesBtn">
+                    🕯️ Blow the Candles!
+                </button>
+            </div>
+
+            <div class="message-container reveal-item">
+                <h3 class="message-header">A Special Message for You</h3>
+                <p class="custom-message-text" id="customMessage">
+                    Wishing you a day filled with love, laughter, and all the things that make you happiest! 🌟
+                </p>
+            </div>
+
+            <div class="header-section reveal-item" style="margin-top: 6rem; margin-bottom: 3rem;">
+                <h3 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--accent); font-style: italic;">Celebration Details</h3>
+            </div>
+
+            <div class="stats-grid reveal-item">
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">📅</div>
+                    <span class="stat-number" id="daysSinceBirth">0</span>
+                    <p class="stat-text">Total Days</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">✨</div>
+                    <span class="stat-number" id="birthdayCount">0</span>
+                    <p class="stat-text">Birthdays Celebrated</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">🌙</div>
+                    <span class="stat-number" id="monthsCount">0</span>
+                    <p class="stat-text">Months of Memories</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">⏳</div>
+                    <span class="stat-number" id="weeksCount">0</span>
+                    <p class="stat-text">Weeks of Joy</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">🎉</div>
+                    <span class="stat-number" id="weekendsCount">0</span>
+                    <p class="stat-text">Weekends Spent</p>
+                </div>
+                <div class="stat-box reveal-item">
+                    <div class="stat-icon">🚀</div>
+                    <span class="stat-number" id="hoursCount">0</span>
+                    <p class="stat-text">Hours of Awesome</p>
+                </div>
+            </div>
+
+            <div class="interactive-section reveal-item">
+                <button class="btn-premium" id="shareBtnAction" style="width: 100%; max-width: 400px; justify-content: center;">
+                    📤 Share the Joy
+                </button>
+            </div>
+        </div>
+
+        <div class="template-footer reveal-item">
+            <div class="footer-box">
+                <p>Created with 💝 by <a href="../index.html">Luminary Wishes</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/encryption-utils.js"></script>
+    <script src="template.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTemplate('birthday');
+            // Initial confetti
+            setTimeout(() => createConfetti(50), 1500);
+        });
+    </script>
+</body>
+
+</html>
+
+</html>

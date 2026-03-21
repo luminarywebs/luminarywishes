@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Complete your Luminary Wishes order - Create your personalized celebration website">
+    <title>Checkout - Luminary Wishes ✨</title>
+    <!-- Favicon & PWA Icons -->
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <link rel="apple-touch-icon" href="assets/logo.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0e27">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/checkout.css">
+    <script src="scripts/config.js"></script>
+    <script src="control/wishes.js"></script>
+    <script src="control/contacts.js"></script>
+    <!-- Google Fonts for premium typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Split Screen Layout -->
+    <div class="checkout-split-layout">
+
+        <!-- Left Panel: Actions & Forms -->
+        <main class="checkout-left-panel">
+            <header class="checkout-header-mini">
+                <a href="index.html" class="logo-text" style="text-decoration: none; color: inherit; display: flex; align-items: center;">
+                    <img src="assets/icon.svg" alt="Luminary Wishes" style="width: 30px; height: 30px; vertical-align: middle; margin-right: 8px;">
+                    <span style="font-weight: 800; font-size: 1.25rem;">Luminary Wishes</span>
+                </a>
+                <a href="index.html" class="back-link">Back to Home</a>
+            </header>
+
+            <div class="checkout-content-wrapper">
+                <div class="checkout-progress">
+                    <div class="step active" data-step="1">
+                        <span class="step-badge">1</span>
+                        <span class="step-text">Connect</span>
+                    </div>
+                    <div class="step-divider"></div>
+                    <div class="step" data-step="2">
+                        <span class="step-badge">2</span>
+                        <span class="step-text">Personalize</span>
+                    </div>
+                    <div class="step-divider"></div>
+                    <div class="step" data-step="3">
+                        <span class="step-badge">3</span>
+                        <span class="step-text">Confirm</span>
+                    </div>
+                </div>
+
+                <div class="steps-container">
+                    <!-- Step 1: Template Selection -->
+                    <div class="checkout-step-content" id="step1">
+                        <h1 class="step-title">Choose Your Vibe</h1>
+                        <p class="step-subtitle">Select a template that matches the celebration.</p>
+
+                        <div class="template-grid" id="templateGrid">
+                            <!-- Templates will be generated dynamically via JS -->
+                        </div>
+
+                        <div class="action-bar">
+                            <button class="btn btn-primary btn-next" onclick="nextStep(2)">Continue to Personalize
+                                ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Personalization -->
+                    <div class="checkout-step-content hidden" id="step2">
+                        <h1 class="step-title">Make it Special</h1>
+                        <p class="step-subtitle">Add the details for the star of the show.</p>
+
+                        <!-- Birthday Form -->
+                        <div class="personalization-form" id="birthday-form" style="display:none;">
+                            <div class="input-group">
+                                <input type="text" id="birthday-name" required placeholder=" ">
+                                <label for="birthday-name">Birthday Person's Name</label>
+                            </div>
+                            <div class="input-group">
+                                <input type="number" id="birthday-age" min="1" max="150" required placeholder=" ">
+                                <label for="birthday-age">Turning Age</label>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="birthday-message" rows="3" placeholder=" "></textarea>
+                                <label for="birthday-message">Special Message (Optional)</label>
+                            </div>
+                        </div>
+
+                        <!-- Anniversary Form -->
+                        <div class="personalization-form" id="anniversary-form" style="display:none;">
+                            <div class="row-inputs">
+                                <div class="input-group">
+                                    <input type="text" id="anniversary-name1" required placeholder=" ">
+                                    <label>First Name</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="anniversary-name2" required placeholder=" ">
+                                    <label>Second Name</label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="number" id="anniversary-years" min="1" max="100" required placeholder=" ">
+                                <label>Years Together</label>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="anniversary-message" rows="3" placeholder=" "></textarea>
+                                <label>Special Message (Optional)</label>
+                            </div>
+                        </div>
+
+                        <!-- Marriage Form -->
+                        <div class="personalization-form" id="marriage-form" style="display:none;">
+                            <div class="row-inputs">
+                                <div class="input-group">
+                                    <input type="text" id="marriage-name1" required placeholder=" ">
+                                    <label>Bride's Name</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="marriage-name2" required placeholder=" ">
+                                    <label>Groom's Name</label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <input type="text" id="marriage-date" required placeholder=" ">
+                                <label>Wedding Date (e.g. June 15, 2025)</label>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="marriage-message" rows="3" placeholder=" "></textarea>
+                                <label>Special Message (Optional)</label>
+                            </div>
+                        </div>
+
+                        <!-- Pro Plan Options -->
+                        <div id="pro-options-form" class="personalization-form hidden pro-section">
+                            <div class="pro-badge">✨ Pro Feature</div>
+                            <div class="row-inputs">
+                                <div class="input-group">
+                                    <input type="text" id="pro-template-id" placeholder=" ">
+                                    <label>Template ID</label>
+                                </div>
+                                <div class="input-group">
+                                    <input type="text" id="pro-template-name" placeholder=" ">
+                                    <label>Custom Theme Name</label>
+                                </div>
+                            </div>
+                            <div class="input-group">
+                                <textarea id="pro-instructions" rows="2" placeholder=" "></textarea>
+                                <label>Instructions for Designer</label>
+                            </div>
+                        </div>
+
+                        <!-- Custom Template Type (Hidden by default, shown if Custom selected) -->
+                        <div id="custom-type-group" class="input-group hidden" style="margin-bottom: 1.5rem;">
+                            <input type="text" id="custom-celebration-type" placeholder=" ">
+                            <label for="custom-celebration-type">Celebration Type (e.g., Diwali, Christmas)</label>
+                        </div>
+
+                        <!-- Edits / Description Field (For Paid Plans) -->
+                        <div id="paid-description-group" class="input-group hidden">
+                            <textarea id="order-description" rows="3" placeholder=" "></textarea>
+                            <label for="order-description">Describe your edits or specific wishes...</label>
+                        </div>
+
+                        <div class="action-bar spaced">
+                            <button class="btn btn-text" onclick="prevStep(1)">Back</button>
+                            <button class="btn btn-primary" onclick="nextStep(3)">Continue</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Payment -->
+                    <div class="checkout-step-content hidden" id="step3">
+                        <h1 class="step-title" id="payment-step-title">Final Details</h1>
+                        <p class="step-subtitle">Secure your celebration link.</p>
+
+                        <div class="payment-container">
+                            <!-- Email Section -->
+                            <div class="input-group highlight">
+                                <input type="email" id="email" required placeholder=" ">
+                                <label for="email">Your Email Address</label>
+                            </div>
+
+                            <!-- Payment Methods Section -->
+                            <div class="payment-methods" id="upi-payment-form">
+                                <p class="input-label">Choose Payment Method</p>
+
+                                <!-- Instructions for User -->
+                                <div class="info-box"
+                                    style="background: rgba(102, 126, 234, 0.1); border-left: 3px solid #667eea; padding: 15px; margin-bottom: 20px; border-radius: 4px;">
+                                    <p style="font-size: 0.9rem; color: #e2e8f0; margin-bottom: 5px;"><strong>✨ What
+                                            happens next?</strong></p>
+                                    <p style="font-size: 0.85rem; color: #cbd5e0;">
+                                        After sending your request, you can chat with our designers to:
+                                    <ul style="margin-top: 5px; padding-left: 20px;">
+                                        <li>Describe your specific edits or vision.</li>
+                                        <li>Share additional photos or details.</li>
+                                        <li>Schedule a call or appointment for complex customizations.</li>
+                                    </ul>
+                                    </p>
+                                </div>
+
+                                <div class="row-inputs">
+                                    <label class="payment-method-option selected"
+                                        onclick="togglePaymentMode('pay-media')">
+                                        <input type="radio" name="payment_mode" value="media" checked
+                                            style="display:none;">
+                                        <span class="icon">💬</span> Pay via Chat/Media
+                                    </label>
+                                    <label class="payment-method-option" onclick="togglePaymentMode('pay-call')">
+                                        <input type="radio" name="payment_mode" value="call" style="display:none;">
+                                        <span class="icon">📞</span> Pay via Call
+                                    </label>
+                                </div>
+
+                                <div id="pay-media-details" class="qr-payment-box" style="margin-top: 1rem;">
+                                    <div class="qr-info">
+                                        <p>Connect with us directly to finalize your order.</p>
+                                        <p style="font-size: 0.9rem; margin-top: 10px; color: var(--text-muted);">
+                                            Click the buttons below to send your order details via your preferred app.
+                                            We will share the payment link there.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div id="pay-call-details" class="qr-payment-box hidden" style="margin-top: 1rem;">
+                                    <div class="qr-info">
+                                        <p>Prefer to talk? Call us directly.</p>
+                                        <h3 style="color: white; margin: 10px 0;" id="display-phone-number">+91 98765
+                                            43210</h3>
+                                        <p style="font-size: 0.9rem; color: var(--text-muted);">Available 9 AM - 9 PM
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="action-bar spaced payment-actions">
+                                <button class="btn btn-text" onclick="prevStep(2)">Back</button>
+                                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                    <button class="btn btn-whatsapp" onclick="processOrder('whatsapp')">
+                                        <i class="fab fa-whatsapp"></i> Send via WhatsApp
+                                    </button>
+                                    <button class="btn btn-telegram" onclick="processOrder('telegram')">
+                                        <i class="fab fa-telegram-plane"></i> Send via Telegram
+                                    </button>
+                                    <button class="btn btn-primary" onclick="processOrder('email')">
+                                        <i class="fas fa-envelope"></i> Send via Email
+                                    </button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <!-- Success State (Moved Outside Step 3) -->
+                    <div class="checkout-step-content hidden" id="success">
+                        <div class="success-content">
+                            <div class="confetti-burst" id="success-icon">🎉</div>
+                            <h1 id="success-title">Order Placed!</h1>
+                            <p id="success-message">Your celebration is being baked.</p>
+
+                            <!-- Instant Details -->
+                            <div id="instant-success-details" class="success-card">
+                                <label>Your Celebration Link:</label>
+                                <div class="copy-link-wrapper">
+                                    <input type="text" id="celebration-link" readonly>
+                                    <button onclick="copyLink()">Copy</button>
+                                </div>
+                                <div class="success-actions-row">
+                                    <a href="#" id="preview-link" target="_blank" class="btn btn-primary">Open
+                                        Page
+                                        🌟</a>
+                                    <button class="btn btn-outline" onclick="shareLink()">Share 📤</button>
+                                </div>
+                                <div class="success-meta">
+                                    <span>✓ Sent to <b id="confirm-email"></b></span>
+                                    <span>✓ Active for <b id="activation-days">30</b> days</span>
+                                </div>
+                            </div>
+
+                            <!-- Waiting Details -->
+                            <div id="waiting-details" class="success-card hidden waiting-mode">
+                                <div class="spinner"></div>
+                                <h3>Verifying Payment...</h3>
+                                <p>We are checking your screenshot manually.</p>
+                                <div class="success-meta">
+                                    <p>Order ID: <span id="waiting-order-id">#LW-8821</span></p>
+                                    <p>Email: <span id="waiting-email">user@example.com</span></p>
+                                </div>
+                                <a href="index.html" class="btn btn-text">Return Home</a>
+                            </div>
+                        </div>
+                    </div>
+
+        </main>
+
+        <!-- Right Panel: Summary & Value (Sticky) -->
+        <aside class="checkout-right-panel">
+            <div class="summary-container">
+                <div class="order-summary-card">
+                    <h2>Order Summary</h2>
+
+                    <div class="summary-details">
+                        <div class="detail-row">
+                            <span>Plan</span>
+                            <strong id="summary-plan">Lumidomain</strong>
+                        </div>
+                        <div class="detail-row">
+                            <span>Template</span>
+                            <strong id="summary-template">Not selected</strong>
+                        </div>
+                    </div>
+
+                    <div class="features-list-compact">
+                        <h4>Includes:</h4>
+                        <ul id="plan-features-list">
+                            <li>✓ Subdomain hosting (30 days)</li>
+                            <li>✓ Full personalization</li>
+                            <li>✓ Mobile optimized</li>
+                        </ul>
+                    </div>
+
+                    <div class="pricing-divider"></div>
+
+                    <div class="pricing-rows">
+                        <div class="price-row">
+                            <span>Subtotal</span>
+                            <span id="summary-subtotal">$9.99</span>
+                        </div>
+                        <div class="price-row total">
+                            <span>Total Due</span>
+                            <strong id="summary-total">$9.99</strong>
+                        </div>
+                    </div>
+
+                    <div class="guarantee-box">
+                        <span class="g-icon">🛡️</span>
+                        <div>
+                            <strong>100% Satisfaction Guarantee</strong>
+                            <p>Love it or your money back.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/encryption-utils.js"></script>
+    <script src="scripts/checkout.js"></script>
+</body>
+
+</html>

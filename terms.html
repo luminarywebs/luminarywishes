@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luminary Wishes - Terms of Service.">
+    <title>Terms of Service — Luminary Wishes</title>
+    <!-- Favicon & PWA Icons -->
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <link rel="apple-touch-icon" href="assets/logo.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0e27">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <!-- VAR SYSTEM Config files -->
+    <script src="scripts/config.js"></script>
+    <script src="control/free_plans.js"></script>
+
+    <style>
+        .page-header {
+            padding: 220px 20px 100px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(102, 126, 234, 0.2) 0%, transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .legal-content {
+            max-width: 900px;
+            margin: 0 auto 120px;
+            padding: 80px 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .legal-content h2 {
+            font-size: 1.8rem;
+            color: white;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .legal-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .legal-content ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .legal-content li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <div class="background-effects">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+        <div class="noise"></div>
+    </div>
+
+    <!-- ★ Global Navigation ★ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/icon.svg" alt="Luminary Wishes" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;">
+                Luminary Wishes
+            </a>
+            <div class="menu-toggle" id="menuToggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#templates">Templates</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pricing.html" class="nav-cta">Start Magic ✨</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Terms of Service</h1>
+        <p style="color: var(--text-muted); font-size: 1.2rem; position: relative; z-index: 1;">Effective Date: January
+            1, 2024</p>
+    </div>
+
+    <div class="container">
+        <div class="legal-content animate-on-scroll">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing and utilizing Luminary Wishes ("Services", "we", "us", or "our"), you agree to be bound by
+                these Terms of Service. If you do not agree with any part of these terms, you may not use our services.
+            </p>
+
+            <h2>2. Description of Service</h2>
+            <p>Luminary Wishes provides an automated platform to host, configure, and display personalized digital
+                celebration web pages (such as birthdays, anniversaries, and other events) utilizing the VAR
+                Configuration System to guarantee accurate, real-time data provision.</p>
+
+            <h2>3. Payments and Subscriptions</h2>
+            <ul>
+                <li>All payments are securely processed through our dedicated payment providers.</li>
+                <li>The Lumistarter (Free) plan is provided as-is without a guarantee of uptime.</li>
+                <li>Premium tiers (Lumidomain, Pro Plan) are strictly non-refundable once the custom domain has been
+                    successfully provisioned.</li>
+                <li>By utilizing our system, you authorize recurring billing based strictly on `window.LUMINARY_CONFIG`
+                    pricing variables.</li>
+            </ul>
+
+            <h2>4. Acceptable Use Policy</h2>
+            <p>You agree not to use Luminary Wishes to host any malicious code, harmful assets, or illegal content. We
+                reserve the right to immediately suspend or terminate any celebration page found violating typical
+                standards of civil decency without refund.</p>
+
+            <h2>5. Intellectual Property</h2>
+            <p>All animations, source codes (`main.js`, `config.js`, etc.), SVGs, and designs hosted natively by
+                Luminary Wishes remain the intellectual property of the service creators, except where explicit
+                white-label licenses are granted (Pro Plan).</p>
+        </div>
+    </div>
+
+    <!-- ★ Global Footer Injected by main.js ★ -->
+    <footer id="global-footer"
+        style="background: var(--dark-card, #111827); padding: 3rem 0 1.5rem; border-top: 1px solid var(--glass-border, rgba(255,255,255,0.06));">
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

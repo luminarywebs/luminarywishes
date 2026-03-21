@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Marriage | Luminary Wishes</title>
+    <link rel="stylesheet" href="template.css">
+</head>
+
+<body class="wedding-theme">
+    <div class="aura-container">
+        <div class="aura-blob blob-1"></div>
+        <div class="aura-blob blob-2"></div>
+        <div class="aura-blob blob-3"></div>
+        <div class="aura-blob blob-4"></div>
+    </div>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-spinner"></div>
+    </div>
+
+    <!-- Interface Elements -->
+    <button class="music-toggle" id="musicToggle" title="Toggle Music">🔊</button>
+    <button class="share-button" id="shareBtn" title="Share This Wish">🔗</button>
+    <audio id="bgMusic" loop src=""></audio>
+    <div id="confettiContainer"></div>
+
+    <div class="content-wrapper">
+        <div class="celebration-card reveal-item">
+            <div class="card-branding reveal-item">
+                <img src="../assets/icon.svg" alt="Luminary Wishes" class="brand-logo-small">
+                <span class="brand-text-small">Luminary Wishes</span>
+            </div>
+
+            <div class="header-section reveal-item">
+                <h1 class="template-title">Happy Marriage</h1>
+                <h2 class="couple-names" id="nameDisplay">Alex & Sam</h2>
+                <p id="weddingDateDisplay" style="font-size: 1.2rem; margin-top: 1rem; color: var(--text-muted); font-weight: 500;"></p>
+            </div>
+
+            <div class="message-container reveal-item">
+                <h3 class="message-header">A Special Message for You</h3>
+                <div class="wedding-icon reveal-item" style="font-size: 80px; text-align: center; margin: 1rem 0;">💍</div>
+                <p class="custom-message-text" id="customMessage">
+                    May your marriage be filled with all the right ingredients: a heap of love, a dash of humor, a touch of romance, and a spoonful of understanding. May your joy last forever! ✨
+                </p>
+            </div>
+
+            <div class="header-section reveal-item" style="margin-top: 4rem; margin-bottom: 2rem;">
+                <h3 style="font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--accent);">Our Love Story</h3>
+            </div>
+            <div class="wedding-event-grid reveal-item">
+                <div class="event-box">
+                    <span class="event-icon">💐</span>
+                    <h3 class="event-title">Ceremony</h3>
+                    <p class="event-desc">Celebration of love</p>
+                </div>
+                <div class="event-box">
+                    <span class="event-icon">💑</span>
+                    <h3 class="event-title">Dance</h3>
+                    <p class="event-desc">Into forever</p>
+                </div>
+                <div class="event-box">
+                    <span class="event-icon">🎊</span>
+                    <h3 class="event-title">Joy</h3>
+                    <p class="event-desc">Lifetime of happiness</p>
+                </div>
+            </div>
+
+            <div class="interactive-section reveal-item">
+                <button class="btn-premium" id="shareBtnAction">
+                    <span>💍 Share the Blessing</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="template-footer reveal-item">
+            <div class="footer-box">
+                <p>Created with 💝 by <a href="../index.html">Luminary Wishes</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/encryption-utils.js"></script>
+    <script src="template.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeTemplate('marriage');
+            // Petals animation
+            setInterval(() => createFallingPetal(), 1500);
+        });
+
+        function createFallingPetal() {
+            const petalLabels = ['🌸', '✨', '🤍'];
+            const petal = document.createElement('div');
+            petal.innerHTML = petalLabels[Math.floor(Math.random() * petalLabels.length)];
+            petal.style.cssText = `
+                position: fixed;
+                top: -30px;
+                left: ${Math.random() * 100}vw;
+                font-size: ${15 + Math.random() * 15}px;
+                opacity: ${0.4 + Math.random() * 0.4};
+                pointer-events: none;
+                z-index: 1;
+            `;
+            document.body.appendChild(petal);
+            petal.animate([
+                { transform: 'translateY(0) rotate(0deg) translateX(0)', opacity: 0.8 },
+                { transform: `translateY(110vh) rotate(${Math.random() * 720}deg) translateX(${Math.random() * 200 - 100}px)`, opacity: 0 }
+            ], {
+                duration: 6000 + Math.random() * 6000,
+                easing: 'linear'
+            }).onfinish = () => petal.remove();
+        }
+    </script>
+</body>
+
+</html>

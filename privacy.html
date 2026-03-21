@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Luminary Wishes - Privacy Policy.">
+    <title>Privacy Policy — Luminary Wishes</title>
+    <!-- Favicon & PWA Icons -->
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <link rel="apple-touch-icon" href="assets/logo.svg">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0a0e27">
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="scripts/config.js"></script>
+    <script src="control/free_plans.js"></script>
+
+    <style>
+        .page-header {
+            padding: 220px 20px 100px;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(102, 126, 234, 0.2) 0%, transparent 50%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .page-header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(135deg, #fff, #a5b4fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .legal-content {
+            max-width: 900px;
+            margin: 0 auto 120px;
+            padding: 80px 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .legal-content h2 {
+            font-size: 1.8rem;
+            color: white;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .legal-content h2:first-child {
+            margin-top: 0;
+        }
+
+        .legal-content ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .legal-content li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body class="dark-theme">
+    <div class="background-effects">
+        <div class="glow glow-1"></div>
+        <div class="glow glow-2"></div>
+        <div class="glow glow-3"></div>
+        <div class="noise"></div>
+    </div>
+
+    <!-- ★ Global Navigation ★ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="assets/icon.svg" alt="Luminary Wishes" style="width: 32px; height: 32px; vertical-align: middle; margin-right: 10px;">
+                Luminary Wishes
+            </a>
+            <div class="menu-toggle" id="menuToggle">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#templates">Templates</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="pricing.html">Pricing</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="pricing.html" class="nav-cta">Start Magic ✨</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Privacy Policy</h1>
+        <p style="color: var(--text-muted); font-size: 1.2rem; position: relative; z-index: 1;">Effective Date: January
+            1, 2024</p>
+    </div>
+
+    <div class="container">
+        <div class="legal-content animate-on-scroll">
+            <h2>1. Information We Collect</h2>
+            <p>At Luminary Wishes, we collect information you provide directly to us when creating a celebration page,
+                including names, contact emails, and personalization details for the celebrations.</p>
+
+            <h2>2. VAR System Data Collection</h2>
+            <p>Our `config.js` and system infrastructure may cache standard session data strictly via `sessionStorage`
+                (e.g., `selectedPlan`) locally on your device to ensure continuous service operations during the
+                checkout flow.</p>
+
+            <h2>3. Use of Information</h2>
+            <p>We use the information we collect strictly to:</p>
+            <ul>
+                <li>Provide, maintain, and improve our customized celebration web pages.</li>
+                <li>Process transactions and send related information, including confirmations and receipts.</li>
+                <li>Respond to your comments, questions, and requests through Telegram or WhatsApp.</li>
+            </ul>
+
+            <h2>4. Cookie Policy</h2>
+            <p>We use first-party cookies solely to maintain state persistence across our subdomains (e.g., remembering
+                your last selected plan via `lw_last_plan`). We do not use third-party advertising tracking cookies.</p>
+
+            <h2>5. Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy, please contact our data protection team via the
+                information provided on our Contact page or the global footer below.</p>
+        </div>
+    </div>
+
+    <!-- ★ Global Footer Injected by main.js ★ -->
+    <footer id="global-footer"
+        style="background: var(--dark-card, #111827); padding: 3rem 0 1.5rem; border-top: 1px solid var(--glass-border, rgba(255,255,255,0.06));">
+    </footer>
+
+    <script src="scripts/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,734 @@
+/* ================================
+   TEMPLATE STYLES - LUMINARY WISHES
+   Celestial Aura 2.0 - Ultra Premium
+   ================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&family=Great+Vibes&family=Outfit:wght@100..900&display=swap');
+
+/* ================================
+   BASE CONFIGURATION
+   ================================ */
+:root {
+    --transition-premium: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --glass-bg: rgba(255, 255, 255, 0.05); /* Increased slightly for better contrast */
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.65);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #000;
+    color: var(--text-primary);
+    line-height: 1.6;
+}
+
+/* ================================
+   THEME DEFINITIONS
+   ================================ */
+.birthday-theme {
+    --aura-1: #4f46e5;
+    --aura-2: #ec4899;
+    --aura-3: #1e1b4b;
+    --aura-4: #8b5cf6;
+    --accent: #f472b6;
+    background: #020617;
+}
+
+.anniversary-theme {
+    --aura-1: #991b1b;
+    --aura-2: #d97706;
+    --aura-3: #450a0a;
+    --aura-4: #7c2d12;
+    --accent: #fbbf24;
+    background: #0c0202;
+}
+
+.wedding-theme {
+    --aura-1: #312e81;
+    --aura-2: #4338ca;
+    --aura-3: #0f172a;
+    --aura-4: #6366f1;
+    --accent: #818cf8;
+    background: #02040a;
+}
+
+/* ================================
+   CELESTIAL AURA BACKGROUND 2.0 (Mesh)
+   ================================ */
+.aura-container {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, rgba(20, 20, 40, 0.4), transparent);
+}
+
+.aura-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px) saturate(150%);
+    opacity: 0.45;
+    mix-blend-mode: screen;
+    animation: auraFloat 25s infinite alternate cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blob-1 {
+    width: 70vw; height: 70vw;
+    top: -15%; left: -15%;
+    background: radial-gradient(circle, var(--aura-1) 0%, transparent 80%);
+}
+
+.blob-2 {
+    width: 60vw; height: 60vw;
+    bottom: -15%; right: -15%;
+    background: radial-gradient(circle, var(--aura-2) 0%, transparent 80%);
+    animation-delay: -5s;
+}
+
+.blob-3 {
+    width: 45vw; height: 45vw;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: radial-gradient(circle, var(--aura-3) 0%, transparent 80%);
+    animation-delay: -10s;
+}
+
+.blob-4 {
+    width: 40vw; height: 40vw;
+    top: 10%; right: 10%;
+    background: radial-gradient(circle, var(--aura-4) 0%, transparent 80%);
+    animation-delay: -15s;
+}
+
+@keyframes auraFloat {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    33% { transform: translate(12%, 10%) scale(1.2) rotate(20deg); }
+    66% { transform: translate(-10%, 15%) scale(0.85) rotate(-15deg); }
+    100% { transform: translate(0, 0) scale(1) rotate(0deg); }
+}
+
+/* ================================
+   MAIN LAYOUT (Enhanced spacing)
+   =============================== */
+.content-wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: clamp(60px, 12vw, 120px) 24px;
+}
+
+.celebration-card {
+    max-width: 1100px;
+    width: 100%;
+    background: var(--glass-bg);
+    backdrop-filter: blur(60px) saturate(220%) brightness(1.1);
+    -webkit-backdrop-filter: blur(60px) saturate(220%) brightness(1.1);
+    border: 1px solid var(--glass-border);
+    border-radius: clamp(50px, 12vw, 100px);
+    padding: clamp(80px, 12vw, 160px) clamp(30px, 10vw, 100px);
+    box-shadow: 
+        0 60px 150px -40px rgba(0, 0, 0, 0.7),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition-premium);
+    animation: masterCardFloat 12s infinite ease-in-out;
+}
+
+/* Card Branding Header */
+.card-branding {
+    position: absolute;
+    top: clamp(25px, 5vw, 45px);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    opacity: 0.7;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.brand-logo-small {
+    width: clamp(24px, 4vw, 32px);
+    height: clamp(24px, 4vw, 32px);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
+}
+
+.brand-text-small {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-primary);
+    white-space: nowrap;
+}
+
+@keyframes masterCardFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-15px) rotate(0.5deg); }
+    66% { transform: translateY(10px) rotate(-0.5deg); }
+}
+
+/* Border Shimmer Layer */
+.celebration-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: translateX(-100%) rotate(45deg);
+    transition: transform 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.celebration-card:hover::after {
+    transform: translateX(100%) rotate(45deg);
+}
+
+/* Floating Particles inside Card */
+.celebration-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.03) 0%, transparent 1%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.03) 0%, transparent 1%),
+        radial-gradient(circle at 40% 80%, rgba(255, 255, 255, 0.03) 0%, transparent 1%);
+    background-size: 100px 100px;
+    animation: particleDrift 20s linear infinite;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+@keyframes particleDrift {
+    from { background-position: 0 0; }
+    to { background-position: 100px 100px; }
+}
+
+/* ================================
+   TYPOGRAPHY (High-Fashion Aesthetics)
+   ================================ */
+.header-section {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.template-title {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.5rem, 15vw, 8rem);
+    background: linear-gradient(to bottom, #ffffff, #a5b4fc);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: -0.5rem;
+    line-height: 1;
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.15));
+    opacity: 0.95;
+}
+
+.name-display, .couple-names {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 12vw, 6.5rem);
+    font-weight: 800;
+    letter-spacing: -3px;
+    margin: 2.5rem 0;
+    line-height: 1;
+    text-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+    font-style: italic;
+}
+
+.message-container {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 40px;
+    padding: 3rem 2rem;
+    margin: 4rem auto;
+    max-width: 850px;
+    position: relative;
+}
+
+.message-header {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    font-style: italic;
+    letter-spacing: 2px;
+}
+
+.custom-message-text {
+    font-family: 'Inter', sans-serif;
+    font-size: clamp(1.2rem, 5vw, 1.4rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* ================================
+   INTERACTIVE COMPONENTS (Sleek)
+   ================================ */
+.interactive-section {
+    display: flex;
+    justify-content: center;
+    gap: clamp(15px, 4vw, 30px);
+    margin-top: 5rem;
+    flex-wrap: wrap;
+}
+
+.btn-premium {
+    padding: clamp(18px, 3.5vw, 24px) clamp(35px, 7vw, 65px);
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: var(--transition-premium);
+    backdrop-filter: blur(15px);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.btn-premium:hover {
+    background: white;
+    color: black;
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 25px 60px rgba(255, 255, 255, 0.15);
+    border-color: white;
+}
+
+.music-toggle, .share-button {
+    position: fixed;
+    z-index: 1000;
+    width: 68px;
+    height: 68px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-premium);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    font-size: 1.6rem;
+}
+
+.music-toggle { top: 40px; right: 40px; }
+.share-button { bottom: 40px; right: 40px; }
+
+.music-toggle:hover, .share-button:hover {
+    transform: translateY(-5px) rotate(5deg);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: var(--accent);
+}
+
+.music-toggle.playing {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ================================
+   SPECIFIC COMPONENT STYLES
+   ================================ */
+
+/* Birthday Cake Premium */
+.cake-container {
+    margin: 6rem 0;
+    display: flex;
+    justify-content: center;
+    perspective: 1000px;
+}
+
+.cake-visual {
+    font-size: 150px;
+    filter: drop-shadow(0 30px 60px rgba(0, 0, 0, 0.6));
+    animation: premiumCakeFloat 6s infinite ease-in-out;
+    cursor: pointer;
+    transition: var(--transition-premium);
+}
+
+@keyframes premiumCakeFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg) scale(1); }
+    50% { transform: translateY(-30px) rotate(3deg) scale(1.05); }
+}
+
+.candles-extinguished .cake-visual {
+    filter: grayscale(0.7) brightness(0.5);
+    transform: scale(0.95);
+}
+
+/* Timeline (Anniversary) - Ultra Premium */
+.love-timeline {
+    margin: clamp(5rem, 12vw, 10rem) 0;
+    position: relative;
+    width: 100%;
+    padding-left: clamp(30px, 8vw, 80px);
+}
+
+.love-timeline::before {
+    content: '';
+    position: absolute;
+    left: clamp(15px, 4vw, 40px);
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--accent), var(--accent), transparent);
+    box-shadow: 0 0 15px var(--accent);
+    opacity: 0.3;
+}
+
+.timeline-item {
+    margin: 100px 0;
+    position: relative;
+    animation: timelineFloat 8s infinite ease-in-out;
+}
+
+.timeline-item:nth-child(even) {
+    animation-delay: -4s;
+}
+
+@keyframes timelineFloat {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-15px) translateX(8px); }
+}
+
+.timeline-marker {
+    position: absolute;
+    left: clamp(-15px, -4vw, -55px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px; height: 44px;
+    background: #000;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+    font-size: 1.4rem;
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.03);
+    padding: clamp(35px, 8vw, 70px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: clamp(30px, 6vw, 60px);
+    transition: var(--transition-premium);
+    backdrop-filter: blur(20px);
+}
+
+.timeline-item:hover .timeline-content {
+    background: rgba(255, 255, 255, 0.08);
+    transform: scale(1.02) translateX(15px);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ================================
+   NUMERICAL STATS GRID (Side-by-Side)
+   ================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin: 4rem 0;
+}
+
+.stat-box {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 35px;
+    padding: 40px 25px;
+    text-align: center;
+    transition: var(--transition-premium);
+    animation: premiumFloat 6s infinite ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-box:nth-child(even) { animation-delay: -3s; }
+
+.stat-box:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-12px) scale(1.02);
+    border-color: var(--accent);
+}
+
+.stat-icon {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 10px 15px rgba(0,0,0,0.3));
+}
+
+.stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+.stat-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* ================================
+   WEDDING EVENT CARDS (Premium Side-by-Side)
+   ================================ */
+.wedding-event-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 5rem 0;
+    flex-wrap: wrap;
+}
+
+.event-box {
+    flex: 1;
+    min-width: 250px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    padding: clamp(30px, 5vw, 60px) 25px;
+    text-align: center;
+    transition: var(--transition-premium);
+    position: relative;
+    overflow: hidden;
+    animation: premiumFloat 6s infinite ease-in-out;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.event-box:nth-child(2) { animation-delay: -2s; }
+.event-box:nth-child(3) { animation-delay: -4s; }
+
+.event-box:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-15px) scale(1.02);
+    border-color: var(--accent);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.event-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.3));
+}
+
+.event-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: #fff;
+}
+
+.event-desc {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+@keyframes premiumFloat {
+    0%, 100% { transform: translateY(0) scale(1) rotate(0deg); }
+    50% { transform: translateY(-15px) scale(1.02) rotate(1deg); }
+}
+
+/* ================================
+   REVEAL SYSTEM (Silky Smooth)
+   ================================ */
+.reveal-item {
+    opacity: 0;
+    transform: translateY(60px) scale(0.96);
+    transition: 
+        opacity 1.5s cubic-bezier(0.16, 1, 0.3, 1), 
+        transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+}
+
+.reveal-item.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ================================
+   PRELOADER (Elegant Shadow)
+   ================================ */
+#preloader {
+    position: fixed;
+    inset: 0;
+    background: #010204;
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader-spinner {
+    width: 65px; height: 65px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid white;
+    border-radius: 50%;
+    animation: premiumSpin 1.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes premiumSpin { to { transform: rotate(360deg); } }
+
+/* ================================
+   ENHANCED FOOTER (Boxed & Floating)
+   ================================ */
+.template-footer {
+    margin-top: 6rem;
+    display: flex;
+    justify-content: center;
+    padding-bottom: 4rem;
+}
+
+.footer-box {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px 50px;
+    border-radius: 100px;
+    transition: var(--transition-premium);
+    animation: footerLift 5s infinite ease-in-out;
+}
+
+.footer-box:hover {
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-8px);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.footer-box p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.footer-box a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    margin-left: 5px;
+    transition: color 0.3s;
+}
+
+.footer-box a:hover {
+    color: var(--accent);
+}
+
+@keyframes footerLift {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
+
+/* ================================
+   RESPONSIVE DESIGN (Pixel Perfect)
+   ================================ */
+@media (max-width: 1024px) {
+    .celebration-card { padding: 100px 50px; }
+}
+
+@media (max-width: 768px) {
+    .celebration-card { 
+        padding: clamp(40px, 8vw, 60px) clamp(15px, 5vw, 25px); 
+        border-radius: 40px;
+    }
+    .stats-grid { 
+        grid-template-columns: 1fr; 
+        gap: 65px;
+        padding: 30px 0;
+    }
+    .stat-box {
+        margin-bottom: 10px;
+    }
+    .wedding-event-grid { 
+        gap: 50px; 
+        padding: 20px 0;
+    }
+    .event-box { 
+        min-width: 100%; 
+        padding: 40px 20px;
+        margin-bottom: 10px;
+    }
+
+    .music-toggle, .share-button {
+        width: 60px; height: 60px;
+        border-radius: 20px;
+        font-size: 1.4rem;
+    }
+    .music-toggle { top: 25px; right: 25px; }
+    .share-button { bottom: 25px; right: 25px; }
+    
+    .love-timeline::before { left: 20px; }
+    .timeline-marker { left: -10px; width: 28px; height: 28px; }
+    .timeline-content { width: 100%; }
+
+    .footer-box {
+        padding: 15px 30px;
+        border-radius: 20px;
+    }
+
+    /* Only Stop Main Card Floating on Mobile, Resume others */
+    .celebration-card {
+        animation: none !important;
+        transform: none !important;
+    }
+    
+    .stat-box, 
+    .event-box, 
+    .timeline-item, 
+    .cake-visual, 
+    .footer-box {
+        animation-duration: 8s !important; /* Slightly slower on mobile for elegance */
+    }
+}
+
+@media (hover: none) {
+    .btn-premium:hover { transform: none; }
+    .timeline-item:hover .timeline-content { transform: none; }
+    .event-box:hover { transform: none; }
+    .footer-box:hover { transform: none; }
+}

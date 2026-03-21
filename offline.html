@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline | Luminary Wishes</title>
+    <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #0a0a1a;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+        }
+
+        .icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        p {
+            color: #a0a8c8;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <div class="icon">
+            <img src="assets/icon.svg" alt="Luminary Wishes" style="width: 80px; height: 80px;">
+        </div>
+        <h1>You're Offline</h1>
+        <p>It seems your device lost its internet connection. Please check your network and try again to continue
+            illuminating your celebrations.</p>
+        <button class="btn" onclick="window.location.reload()" style="margin-bottom: 30px;">Retry Connection</button>
+        <div
+            style="font-size: 0.8rem; color: rgba(255,255,255,0.3); border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px;">
+            &copy; 2026 Luminary Wishes. All rights reserved.
+        </div>
+    </div>
+</body>
+
+</html>
