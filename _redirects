@@ -1,1 +1,8 @@
+# Force all alternate domains to primary domain
 
+https://*.netlify.app/* https://luminarywishes.dpdns.org/:splat 301!
+http://luminarywishes.dpdns.org/* https://luminarywishes.dpdns.org/:splat 301!
+https://www.luminarywishes.dpdns.org/* https://luminarywishes.dpdns.org/:splat 301!
+
+# Custom Error Pages
+/* /404.html 404
