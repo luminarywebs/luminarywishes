@@ -1,0 +1,6 @@
+# Redirect Rules for Netlify
+
+/* https://luminarywishes.dpdns.org/:splat 301!
+
+# Custom Error Pages
+/* /404.html 404
