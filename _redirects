@@ -1,6 +1,6 @@
-# Force all alternate domains to primary domain
+# Redirect Rules for Netlify
 
-https://*.netlify.app/* https://luminarywishes.dpdns.org/:splat 301!
+https://luminarywishes.netlify.app/* https://luminarywishes.dpdns.org/:splat 301!
 http://luminarywishes.dpdns.org/* https://luminarywishes.dpdns.org/:splat 301!
 https://www.luminarywishes.dpdns.org/* https://luminarywishes.dpdns.org/:splat 301!
 
