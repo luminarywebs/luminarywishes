@@ -4,9 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Complete your Luminary Wishes order - Create your personalized celebration website">
-    <title>Checkout - Luminary Wishes ✨</title>
+    <title>Checkout — Luminary Wishes ✨ | Complete Your Order</title>
+    <meta name="description" content="Complete your Luminary Wishes order — create your personalized celebration website for birthdays, anniversaries, or weddings.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://luminarywishes.dpdns.org/checkout.html">
+    <meta property="og:title" content="Checkout — Luminary Wishes ✨">
+    <meta property="og:site_name" content="Luminary Wishes">
     <!-- Favicon & PWA Icons -->
     <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
     <link rel="apple-touch-icon" href="assets/logo.svg">
@@ -17,11 +20,85 @@
     <script src="scripts/config.js"></script>
     <script src="control/wishes.js"></script>
     <script src="control/contacts.js"></script>
+    <script src="control/pricing_plans.js"></script>
     <!-- Google Fonts for premium typography -->
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">{
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "@id": "https://luminarywishes.dpdns.org/#website",
+          "url": "https://luminarywishes.dpdns.org/",
+          "name": "Luminary Wishes",
+          "description": "Create personalized animated celebration websites for birthdays, anniversaries and weddings.",
+          "publisher": { "@id": "https://luminarywishes.dpdns.org/#organization" },
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://luminarywishes.dpdns.org/?s={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "Organization",
+          "@id": "https://luminarywishes.dpdns.org/#organization",
+          "name": "Luminary Wishes",
+          "url": "https://luminarywishes.dpdns.org/",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://luminarywishes.dpdns.org/assets/logo.svg"
+          },
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+91-82947-21929",
+            "contactType": "customer support",
+            "availableLanguage": ["English", "Hindi"],
+            "hoursAvailable": "Mo-Su 10:00-22:00"
+          },
+          "sameAs": [
+            "https://instagram.com/luminarywebs",
+            "https://t.me/luminarywebs_admin",
+            "https://luminarytechnicals.dpdns.org"
+          ],
+          "founder": {
+            "@type": "Person",
+            "name": "AR. Abhinav Ranjan",
+            "url": "https://abhinavranjan.qzz.io",
+            "sameAs": ["https://luminarytechnicals.dpdns.org"]
+          }
+        },
+        {
+          "@type": "WebPage",
+          "@id": "https://luminarywishes.dpdns.org/#webpage",
+          "url": "https://luminarywishes.dpdns.org/",
+          "name": "Luminary Wishes — Personalized Celebration Websites",
+          "isPartOf": { "@id": "https://luminarywishes.dpdns.org/#website" },
+          "about": { "@id": "https://luminarywishes.dpdns.org/#organization" },
+          "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://luminarywishes.dpdns.org/" }
+            ]
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Luminary Wishes",
+          "operatingSystem": "Any (Web PWA)",
+          "applicationCategory": "LifestyleApplication",
+          "offers": [
+            { "@type": "Offer", "name": "Lumistarter", "price": "0", "priceCurrency": "INR" },
+            { "@type": "Offer", "name": "Lumidomain", "price": "99", "priceCurrency": "INR" },
+            { "@type": "Offer", "name": "Pro Plan", "price": "399", "priceCurrency": "INR" }
+          ]
+        }
+      ]
+    }</script>
 </head>
 
 <body>
+
     <!-- Split Screen Layout -->
     <div class="checkout-split-layout">
 
@@ -349,7 +426,9 @@
     </div>
 
     <!-- Scripts -->
+    <script src="scripts/timesync.js"></script>
     <script src="scripts/encryption-utils.js"></script>
+    <script src="scripts/management.js"></script>
     <script src="scripts/checkout.js"></script>
 </body>
 

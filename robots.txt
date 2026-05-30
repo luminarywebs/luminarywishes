@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /control/
+Disallow: /scripts/encryption-utils.js
+
+Sitemap: https://luminarywishes.dpdns.org/sitemap.xml

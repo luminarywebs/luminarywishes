@@ -1,8 +1,18 @@
-# Redirect Rules for Netlify
+# Luminary Wishes — Redirect Rules (Netlify / Cloudflare Pages)
 
-https://luminarywishes.netlify.app/* https://luminarywishes.dpdns.org/:splat 301!
-http://luminarywishes.dpdns.org/* https://luminarywishes.dpdns.org/:splat 301!
+# Canonical domain — redirect www to non-www
 https://www.luminarywishes.dpdns.org/* https://luminarywishes.dpdns.org/:splat 301!
 
-# Custom Error Pages
-/* /404.html 404
+# Short wish links → templates
+/b/:token   /templates/birthday.html?token=:token    200
+/a/:token   /templates/anniversary.html?token=:token  200
+/m/:token   /templates/marriage.html?token=:token     200
+
+# Legacy URL redirects
+/privacy    /more/privacy.html    301
+/terms      /more/terms.html      301
+/owner      /more/owner.html      301
+/credits    /more/credits.html    301
+
+# 404 fallback
+/*  /404.html  404

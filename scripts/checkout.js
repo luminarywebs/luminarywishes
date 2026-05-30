@@ -3,7 +3,7 @@
 // State Management
 const checkoutState = {
     currentStep: 1,
-    selectedPlan: 'lumidomain',
+    selectedPlan: 'plus',
     planPrice: (window.LUMINARY_CONFIG && window.LUMINARY_CONFIG.plans.normal.price) ? parseFloat(window.LUMINARY_CONFIG.plans.normal.price.replace(/[^0-9.]/g, '')) : 99,
     selectedTemplate: null,
     personalizationData: {},
@@ -436,7 +436,7 @@ function showPersonalizationForm(template) {
 
 function updateOrderSummary() {
     let planName = 'Lumidomain';
-    if (checkoutState.selectedPlan === 'free') planName = window.FREE_PLAN_CONFIG ? (window.FREE_PLAN_CONFIG.name + ' (Free)') : 'Lumistarter (Free)';
+    if (checkoutState.selectedPlan === 'free') planName = 'Lumistarter (Free)';
     else if (checkoutState.selectedPlan === 'pro') planName = 'Pro Plan';
 
     document.getElementById('summary-plan').textContent = planName;
@@ -458,7 +458,7 @@ function updateOrderSummary() {
 
     if (checkoutState.selectedPlan === 'free') {
         featuresList.innerHTML = `<li>✓ Basic subdomain (${freeDur})</li><li>✓ Try for free</li><li>✓ 3 Stunning templates</li><li>✓ Standard support</li>`;
-    } else if (checkoutState.selectedPlan === 'lumidomain') {
+    } else if (checkoutState.selectedPlan === 'plus') {
         featuresList.innerHTML = `<li>✓ Subdomain hosting (${normDur})</li><li>✓ Full personalization</li><li>✓ All animations</li><li>✓ Mobile optimized</li><li>✓ Social sharing</li>`;
     } else {
         let proDetails = '';
@@ -541,8 +541,13 @@ Please verify my order and share the payment link.
     if (platform === 'whatsapp') {
         url = `https://wa.me/${config.whatsapp}?text=${encodedMessage}`;
     } else if (platform === 'telegram') {
-        url = `https://t.me/${config.telegram}`; // Telegram usually doesn't support pre-filled text in same way via simple link, but user requested link.
-        // Coping to clipboard is often better for Tele, but we'll open the chat.
+        // Telegram deep links don't support pre-filled text; copy to clipboard so user can paste
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(message).then(() => {
+                showNotification('Order details copied! Paste in Telegram chat 📋', 'success');
+            }).catch(() => {});
+        }
+        url = `https://t.me/${config.telegram}`;
     } else if (platform === 'email') {
         url = `mailto:${config.email}?subject=${encodeURIComponent(config.messages.paymentSubject)}&body=${encodedMessage}`;
     }
@@ -576,37 +581,39 @@ function processManualVerification(platform) {
 
 function generateCelebrationLink() {
     try {
-        const template = checkoutState.selectedTemplate || 'birthday';
-        const data = checkoutState.personalizationData;
+        const type = checkoutState.selectedTemplate || 'birthday';
+        const data = { ...checkoutState.personalizationData, plan: checkoutState.selectedPlan || 'free' };
 
-        // Construct relative URL using standard API
-        // This handles file://, localhost, and subdirectories correctly
-        const url = new URL(`templates/${template}.html`, window.location.href);
-
-        // Clear existing params if any (from window.location)
-        url.search = '';
-
-        if (typeof encryptData === 'function') {
-            const encrypted = encryptData(data);
-            if (encrypted) {
-                url.searchParams.set('data', encrypted);
-            } else {
-                throw new Error('Encryption returned null');
-            }
-        } else {
-            // Fallback
-            for (const [key, value] of Object.entries(data)) {
-                if (value) url.searchParams.set(key, value);
+        // Use new short encrypted links: /b/ /a/ /m/
+        if (window.LWEncryption) {
+            const shortLink = LWEncryption.buildLink(type, data);
+            if (shortLink) {
+                // Record free use if applicable
+                if (data.plan === 'free' && window.LWManagement) {
+                    const token = shortLink.split('/').pop();
+                    LWManagement.recordFreeUse(token);
+                }
+                return shortLink;
             }
         }
 
-        return url.href;
+        // Fallback: legacy ?data= param
+        if (typeof encryptData === 'function') {
+            const url = new URL(`templates/${type}.html`, window.location.href);
+            url.search = '';
+            const encrypted = encryptData(data);
+            if (encrypted) url.searchParams.set('data', encrypted);
+            return url.href;
+        }
+
+        // Last resort
+        const base = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+        return `${base}templates/${type}.html`;
 
     } catch (e) {
-        console.error('Link Generation Error:', e);
-        // Emergency fallback: manually construct simple string
-        const baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
-        return `${baseUrl}templates/${checkoutState.selectedTemplate}.html`;
+        console.error('[LW] Link Generation Error:', e);
+        const base = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+        return `${base}templates/${checkoutState.selectedTemplate}.html`;
     }
 }
 
@@ -638,7 +645,7 @@ function showSuccessPage(celebrationLink, isWaiting = false) {
         const freeDur = window.FREE_PLAN_CONFIG ? window.FREE_PLAN_CONFIG.duration : 'Unlimited';
         const normDur = window.LUMINARY_CONFIG?.plans?.normal?.duration || '28 Days';
         const proDur = window.LUMINARY_CONFIG?.plans?.pro?.duration || '28 Days';
-        document.getElementById('activation-days').textContent = checkoutState.selectedPlan === 'free' ? freeDur : (checkoutState.selectedPlan === 'lumidomain' ? normDur : proDur);
+        document.getElementById('activation-days').textContent = checkoutState.selectedPlan === 'free' ? freeDur : (checkoutState.selectedPlan === 'plus' ? normDur : proDur);
     }
 
     createSuccessConfetti();
@@ -715,12 +722,18 @@ document.addEventListener('DOMContentLoaded', () => {
     ensureNotificationStyles();
     // Inject Preloader HTML if not present
     if (!document.getElementById('preloader')) {
+        const isSubdir = window.location.pathname.includes('/more/') || window.location.pathname.includes('/templates/');
+        const iconPath = isSubdir ? '../assets/icon.svg' : 'assets/icon.svg';
+
         const preloader = document.createElement('div');
         preloader.id = 'preloader';
         preloader.innerHTML = `
             <div class="loader-content">
                 <div class="loader-spinner"></div>
-                <div class="loader-logo">✨ Luminary Wishes</div>
+                <div class="loader-logo">
+                    <img src="${iconPath}" alt="Logo" style="width: 40px; height: 40px; vertical-align: middle; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;">
+                    Luminary Wishes
+                </div>
             </div>
         `;
         document.body.prepend(preloader);
@@ -728,7 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-window.addEventListener('load', () => {
+const hidePreloader = () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
         setTimeout(() => {
@@ -737,8 +750,16 @@ window.addEventListener('load', () => {
             document.body.classList.remove('loading');
             setTimeout(() => preloader.remove(), 600);
         }, 500);
+    } else {
+        document.body.classList.remove('loading');
     }
-});
+};
+
+if (document.readyState === 'complete') {
+    hidePreloader();
+} else {
+    window.addEventListener('load', hidePreloader);
+}
 
 // PWA Service Worker for Checkout
 if ('serviceWorker' in navigator) {

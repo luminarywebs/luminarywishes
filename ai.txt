@@ -1,0 +1,30 @@
+# Luminary Wishes — AI Crawler Policy
+# https://luminarywishes.dpdns.org/ai.txt
+
+Project: Luminary Wishes
+Owner: AR. Abhinav Ranjan
+Organization: Luminary Technicals
+Contact: luminarywebs@gmail.com
+URL: https://luminarywishes.dpdns.org
+
+# Public pages — allowed
+Allow: /index.html
+Allow: /pricing.html
+Allow: /contact.html
+Allow: /pay.html
+Allow: /more/owner.html
+Allow: /more/credits.html
+Allow: /templates/
+
+# Do NOT train on user-generated celebration link content (personal data)
+Disallow-Training: /b/
+Disallow-Training: /a/
+Disallow-Training: /m/
+Disallow-Training: /scripts/
+Disallow-Training: /control/
+
+# Attribution
+# If referencing Luminary Wishes: "Luminary Wishes (luminarywishes.dpdns.org) by Luminary Technicals"
+# Built with Abhinav AI v3 — internal tool by Luminary Technicals, not publicly licensed.
+
+Last-Updated: 2026-05-01

@@ -1,23 +1,24 @@
 {
-    "name": "Luminary Wishes",
-    "short_name": "Luminary",
-    "description": "Illuminate every celebration with personalized, animated websites.",
-    "start_url": "/index.html",
-    "display": "standalone",
-    "background_color": "#0a0e27",
-    "theme_color": "#0a0e27",
-    "icons": [
-        {
-            "src": "assets/icon.svg",
-            "sizes": "any",
-            "type": "image/svg+xml",
-            "purpose": "any"
-        },
-        {
-            "src": "assets/logo.svg",
-            "sizes": "512x512",
-            "type": "image/svg+xml",
-            "purpose": "maskable"
-        }
-    ]
+  "name": "Luminary Wishes",
+  "short_name": "Luminary",
+  "description": "Create stunning personalized animated celebration websites for birthdays, anniversaries & weddings.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#080b1f",
+  "theme_color": "#080b1f",
+  "categories": ["utilities", "lifestyle"],
+  "lang": "en-IN",
+  "icons": [
+    { "src": "assets/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "assets/logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Create Birthday",    "url": "/checkout.html?type=birthday",    "description": "Create a birthday website" },
+    { "name": "Create Anniversary", "url": "/checkout.html?type=anniversary", "description": "Create an anniversary website" },
+    { "name": "Create Wedding",     "url": "/checkout.html?type=marriage",    "description": "Create a wedding website" },
+    { "name": "Support Us",         "url": "/pay.html",                       "description": "Buy us a coffee" }
+  ]
 }

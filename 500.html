@@ -2,14 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>You're Offline | Luminary Wishes</title>
+  <title>500 — Server Error | Luminary Wishes</title>
+  <meta name="robots" content="noindex">
   <link rel="icon" type="image/svg+xml" href="assets/icon.svg">
   <link rel="stylesheet" href="styles/main.css">
-  <style>
-    .offline{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;gap:1.5rem}
-    .pulse{animation:pulse 2s ease-in-out infinite}
-    @keyframes pulse{0%,100%{opacity:.5;transform:scale(.95)}50%{opacity:1;transform:scale(1.05)}}
-  </style>
+  <script src="scripts/config.js"></script>
+  <style>.err{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:2rem;gap:1.5rem;padding-top:88px}.float{animation:float 4s ease-in-out infinite alternate}@keyframes float{from{transform:translateY(0)}to{transform:translateY(-14px)}}</style>
 
 <script type="application/ld+json">{
       "@context": "https://schema.org",
@@ -83,7 +81,7 @@
       ]
     }</script>
 </head>
-  <link rel="canonical" href="https://luminarywishes.dpdns.org/offline.html">
+  <link rel="canonical" href="https://luminarywishes.dpdns.org/500.html">
 <body>
 
 <nav class="navbar" id="navbar">
@@ -106,36 +104,25 @@
     </div>
 </nav>
 
-  <div class="offline">
-    <div class="pulse">
-      <svg width="120" height="120" viewBox="0 0 120 120">
-        <circle cx="60" cy="60" r="55" fill="rgba(102,126,234,.06)" stroke="rgba(102,126,234,.15)" stroke-width="2"/>
-        <g transform="translate(20,22)">
-          <path d="M4 54 Q40 20 76 54" fill="none" stroke="rgba(102,126,234,.35)" stroke-width="5" stroke-linecap="round"/>
-          <path d="M16 42 Q40 24 64 42" fill="none" stroke="rgba(102,126,234,.55)" stroke-width="5" stroke-linecap="round"/>
-          <path d="M28 31 Q40 23 52 31" fill="none" stroke="rgba(102,126,234,.8)" stroke-width="5" stroke-linecap="round"/>
-          <circle cx="40" cy="58" r="5" fill="#667eea"/>
-          <line x1="58" y1="8" x2="72" y2="22" stroke="#f5576c" stroke-width="4" stroke-linecap="round"/>
-          <line x1="72" y1="8" x2="58" y2="22" stroke="#f5576c" stroke-width="4" stroke-linecap="round"/>
-        </g>
+  <nav style="position:fixed;top:0;left:0;right:0;height:68px;background:rgba(8,11,31,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.08);z-index:1000;display:flex;align-items:center;padding:0 2rem">
+    <a href="/" style="display:flex;align-items:center;gap:.6rem;font-weight:800;text-decoration:none;color:#fff"><img src="assets/logo.svg" width="28" height="28" alt=""> <span style="background:linear-gradient(135deg,#667eea,#764ba2);-webkit-background-clip:text;background-clip:text;color:transparent">Luminary Wishes</span></a>
+  </nav>
+  <div class="err">
+    <div class="float">
+      <svg width="110" height="110" viewBox="0 0 110 110" style="margin:0 auto 1.5rem">
+        <circle cx="55" cy="55" r="50" fill="rgba(255,215,0,.06)" stroke="rgba(255,215,0,.2)" stroke-width="2"/>
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="44">⚡</text>
       </svg>
+      <h1 style="font-size:clamp(1.8rem,4vw,2.4rem);margin-bottom:.75rem">Something Went Wrong</h1>
+      <p style="color:var(--text-muted,#7885b2);max-width:400px;margin:0 auto 2rem;line-height:1.7">Our servers hit a bump. This is on us — not you. Please try again in a moment.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <a href="/" class="btn btn-primary">Go Home</a>
+        <button onclick="location.reload()" class="btn btn-outline">Try Again</button>
+      </div>
     </div>
-    <h1 style="font-size:clamp(1.8rem,4vw,2.4rem)">You're offline</h1>
-    <p style="color:var(--text-muted,#7885b2);max-width:380px;line-height:1.7">No internet connection. Check your network and try again — Luminary Wishes will be right here.</p>
-    <p style="color:rgba(102,126,234,.8);font-size:.88rem;font-weight:600">✓ Previously visited pages are cached and still available</p>
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-      <button onclick="location.reload()" class="btn btn-primary">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-right:4px"><path d="M23 4v6h-6"/><path d="M1 20v-6h6"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        Retry
-      </button>
-      <a href="/" class="btn btn-outline">Home</a>
-    </div>
-    <p style="color:var(--text-muted,#7885b2);font-size:.78rem">Luminary Wishes — by Luminary Technicals</p>
   </div>
-
-<footer id="global-footer" style="padding: 4rem 0 1.5rem; margin-top: 2rem; background: var(--dark-card); border-top: 1px solid var(--glass-border);">
-    <!-- Footer content (optional) -->
-</footer>
-
+  <script src="scripts/main.js"></script>
+  <script>document.addEventListener('DOMContentLoaded',()=>{if(typeof renderFooter==='function')renderFooter();})</script>
+  <footer id="global-footer"></footer>
 </body>
 </html>

@@ -1,93 +1,150 @@
-// Encryption Utilities for Luminary Wishes
-// Provides Base64 encoding/decoding for URL parameters to obfuscate personal information
-
 /**
- * Encrypts (Base64 encodes) an object into a URL-safe string
- * @param {Object} data - The data object to encrypt
- * @returns {string} Base64 encoded string
+ * Luminary Wishes — Encryption & Short Link System
+ * Short links:  /b/TOKEN  → birthday
+ *               /a/TOKEN  → anniversary
+ *               /m/TOKEN  → marriage
+ * Payload is XOR-obfuscated then base62-encoded → short token (~10-14 chars)
  */
+
+const LWEncryption = (() => {
+    const B62   = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const XKEY  = 'LW2026';
+
+    function xor(str, key) {
+        let out = '';
+        for (let i = 0; i < str.length; i++)
+            out += String.fromCharCode(str.charCodeAt(i) ^ key.charCodeAt(i % key.length));
+        return out;
+    }
+
+    function b62enc(bytes) {
+        let num = BigInt('0x' + Array.from(bytes).map(b => b.toString(16).padStart(2,'0')).join(''));
+        if (num === 0n) return '0';
+        let r = '';
+        while (num > 0n) { r = B62[Number(num % 62n)] + r; num /= 62n; }
+        return r;
+    }
+
+    function b62dec(s) {
+        let num = 0n;
+        for (const c of s) num = num * 62n + BigInt(B62.indexOf(c));
+        let hex = num.toString(16);
+        if (hex.length % 2) hex = '0' + hex;
+        const bytes = [];
+        for (let i = 0; i < hex.length; i += 2) bytes.push(parseInt(hex.slice(i, i+2), 16));
+        return new Uint8Array(bytes);
+    }
+
+    // Abbreviate keys to save space
+    const ENC_MAP = { name:'n', name1:'n1', name2:'n2', age:'a', years:'y', date:'d', message:'m', theme:'t', music:'mu', plan:'p', type:'ty', timestamp:'ts', expiry:'ex', customColor:'cc' };
+    const DEC_MAP = Object.fromEntries(Object.entries(ENC_MAP).map(([k,v])=>[v,k]));
+
+    function compress(obj) {
+        const out = {};
+        for (const [k,v] of Object.entries(obj)) if (v !== null && v !== undefined) out[ENC_MAP[k]||k] = v;
+        return JSON.stringify(out);
+    }
+    function decompress(str) {
+        const mini = JSON.parse(str), out = {};
+        for (const [k,v] of Object.entries(mini)) out[DEC_MAP[k]||k] = v;
+        return out;
+    }
+
+    function encode(payload) {
+        try {
+            const bytes = new TextEncoder().encode(xor(compress(payload), XKEY));
+            return b62enc(bytes);
+        } catch(e) { console.error('[LWEnc] encode', e); return null; }
+    }
+
+    function decode(token) {
+        try {
+            const bytes = b62dec(token);
+            return decompress(xor(new TextDecoder().decode(bytes), XKEY));
+        } catch(e) { console.error('[LWEnc] decode', e); return null; }
+    }
+
+    // Build full https short URL
+    function buildLink(type, data) {
+        const prefixes = { birthday:'/b/', anniversary:'/a/', marriage:'/m/' };
+        const prefix   = prefixes[type] || '/b/';
+        const domain   = window.LUMINARY_CONFIG?.domain || 'luminarywishes.dpdns.org';
+        const plan     = data.plan || 'free';
+        const now      = Date.now();
+        const payload  = {
+            ...data,
+            type,
+            plan,
+            timestamp: now,
+            expiry: plan === 'free' ? null : now + 365*24*60*60*1000
+        };
+        const token = encode(payload);
+        return token ? `https://${domain}${prefix}${token}` : null;
+    }
+
+    // Parse current URL token
+    function parseCurrentURL() {
+        const path = window.location.pathname;
+        const map  = { '/b/':'birthday', '/a/':'anniversary', '/m/':'marriage' };
+        for (const [pfx] of Object.entries(map)) {
+            if (path.startsWith(pfx)) {
+                const token = path.slice(pfx.length);
+                return token ? decode(token) : null;
+            }
+        }
+        // Fallback: ?data= (legacy)
+        const sp = new URLSearchParams(window.location.search);
+        if (sp.has('data')) return legacyDecode(sp.get('data'));
+        return null;
+    }
+
+    // Legacy base64 decode (backward compat)
+    function legacyDecode(enc) {
+        try {
+            let b64 = enc.replace(/-/g,'+').replace(/_/g,'/');
+            while (b64.length%4) b64+='=';
+            return JSON.parse(decodeURIComponent(escape(atob(b64))));
+        } catch { return null; }
+    }
+
+    function isExpired(payload) {
+        if (!payload?.expiry) return false;
+        const now = window.LWTimeSync ? window.LWTimeSync.now() : Date.now();
+        return now > payload.expiry;
+    }
+
+    return { encode, decode, buildLink, parseCurrentURL, isExpired };
+})();
+
+// Legacy aliases so existing code still works
 function encryptData(data) {
     try {
-        // Convert object to JSON string
-        const jsonString = JSON.stringify(data);
-
-        // Encode to Base64
-        const base64 = btoa(unescape(encodeURIComponent(jsonString)));
-
-        // Make URL-safe by replacing characters
-        return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-    } catch (error) {
-        console.error('Encryption error:', error);
-        return null;
-    }
+        const json = JSON.stringify(data);
+        const b64  = btoa(unescape(encodeURIComponent(json)));
+        return b64.replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    } catch(e) { return null; }
 }
-
-/**
- * Decrypts (Base64 decodes) a URL-safe string back into an object
- * @param {string} encrypted - The Base64 encoded string
- * @returns {Object|null} Decrypted data object or null if decryption fails
- */
-function decryptData(encrypted) {
+function decryptData(enc) {
     try {
-        if (!encrypted) {
-            return null;
-        }
-
-        // Restore Base64 format from URL-safe format
-        let base64 = encrypted.replace(/-/g, '+').replace(/_/g, '/');
-
-        // Add padding if needed
-        while (base64.length % 4) {
-            base64 += '=';
-        }
-
-        // Decode from Base64
-        const jsonString = decodeURIComponent(escape(atob(base64)));
-
-        // Parse JSON back to object
-        return JSON.parse(jsonString);
-    } catch (error) {
-        console.error('Decryption error:', error);
-        return null;
-    }
+        let b64 = enc.replace(/-/g,'+').replace(/_/g,'/');
+        while (b64.length%4) b64+='=';
+        return JSON.parse(decodeURIComponent(escape(atob(b64))));
+    } catch(e) { return null; }
 }
-
-/**
- * Checks if a URL parameter is encrypted
- * @param {URLSearchParams} params - URL search parameters
- * @returns {boolean} True if encrypted parameter exists
- */
-function hasEncryptedParam(params) {
-    return params.has('data');
-}
-
-/**
- * Gets decrypted data from URL parameters
- * Falls back to reading individual parameters if no encrypted data found
- * @param {URLSearchParams} params - URL search parameters
- * @returns {Object} Decrypted data or individual parameters
- */
+function hasEncryptedParam(params) { return params.has('data'); }
 function getDataFromURL(params) {
-    // Check for encrypted parameter first
     if (hasEncryptedParam(params)) {
-        const encryptedData = params.get('data');
-        const decrypted = decryptData(encryptedData);
-        if (decrypted) {
-            return decrypted;
-        }
+        const d = decryptData(params.get('data'));
+        if (d) return d;
     }
-
-    // Fallback to individual parameters for backward compatibility
     return {
-        name: params.get('name') || null,
-        name1: params.get('name1') || null,
-        name2: params.get('name2') || null,
-        age: params.get('age') || null,
-        years: params.get('years') || null,
-        date: params.get('date') || null,
-        message: params.get('message') || null
+        name: params.get('name')||null, name1:params.get('name1')||null,
+        name2:params.get('name2')||null, age:params.get('age')||null,
+        years:params.get('years')||null, date:params.get('date')||null,
+        message:params.get('message')||null, theme:params.get('theme')||null,
+        music:params.get('music')||null, plan:params.get('plan')||'free'
     };
 }
 
-// Log successful load
-console.log('%c🔒 Encryption Utils Loaded', 'color: #43e97b; font-weight: bold;');
+window.LWEncryption = LWEncryption;
+console.log('%c🔒 Encryption Utils Loaded (v2 — short links)', 'color:#43e97b;font-weight:bold;');

@@ -215,13 +215,16 @@ ctaButtons.forEach(btn => {
 document.addEventListener('DOMContentLoaded', () => {
     // Inject Preloader HTML if not present
     if (!document.getElementById('preloader')) {
+        const isSubdir = window.location.pathname.includes('/more/') || window.location.pathname.includes('/templates/');
+        const iconPath = isSubdir ? '../assets/icon.svg' : 'assets/icon.svg';
+        
         const preloader = document.createElement('div');
         preloader.id = 'preloader';
         preloader.innerHTML = `
             <div class="loader-content">
                 <div class="loader-spinner"></div>
                 <div class="loader-logo">
-                    <img src="assets/icon.svg" alt="Logo" style="width: 40px; height: 40px; vertical-align: middle; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;">
+                    <img src="${iconPath}" alt="Logo" style="width: 40px; height: 40px; vertical-align: middle; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto;">
                     Luminary Wishes
                 </div>
             </div>
@@ -231,10 +234,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-window.addEventListener('load', () => {
+const hidePreloader = () => {
     const preloader = document.getElementById('preloader');
     if (preloader) {
-        // Small buffer to ensure "pop-in" feel
         setTimeout(() => {
             preloader.style.opacity = '0';
             preloader.style.visibility = 'hidden';
@@ -245,8 +247,16 @@ window.addEventListener('load', () => {
                 preloader.remove();
             }, 600);
         }, 500); // 500ms minimum wait time
+    } else {
+        document.body.classList.remove('loading');
     }
-});
+};
+
+if (document.readyState === 'complete') {
+    hidePreloader();
+} else {
+    window.addEventListener('load', hidePreloader);
+}
 
 // ================================
 // INTERACTIVE STAR RATING
@@ -533,7 +543,7 @@ function renderGlobalFooter() {
                 </div>
             </div>
             <div style="text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); color: var(--text-muted, #9ca3af); font-size:0.9rem;">
-                <p>&copy; 2026 Luminary Wishes. All rights reserved. Made with 💝 for celebrations.</p>
+                <p>&copy; 2026 <strong>Luminary Wishes</strong>. All rights reserved. Made with 💝 by <a href="https://luminarytechnicals.dpdns.org" target="_blank" rel="noopener" style="color: inherit; font-weight: 700;">Luminary Technicals</a> · <a href="https://abhinavranjan.qzz.io" target="_blank" rel="noopener" style="color: inherit;">AR. Abhinav Ranjan</a></p>
             </div>
         </div>
     `;
