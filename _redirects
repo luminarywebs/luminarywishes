@@ -1,4 +1,6 @@
-# Luminary Wishes — Redirect Rules (Netlify / Cloudflare Pages)
+# Redirect Netlify subdomain to custom domain
+https://luminarywishes.netlify.app/* https://luminarywishes.dpdns.org/:splat 301!
+https://www.luminarywishes.netlify.app/* https://luminarywishes.dpdns.org/:splat 301!
 
 # Canonical domain — redirect www to non-www
 https://www.luminarywishes.dpdns.org/* https://luminarywishes.dpdns.org/:splat 301!
