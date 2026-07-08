@@ -2,4 +2,24 @@ User-agent: *
 Allow: /
 Disallow: /scripts/encryption-utils.js
 
+# Allow crawling of all pages
+Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://luminarywishes.dpdns.org/sitemap.xml
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+User-agent: SemrushBot
+User-agent: DotBot
+Disallow: /
